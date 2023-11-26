@@ -12,7 +12,9 @@ async def create_recipe(recipe: Recipe):
     recipe_dict = recipe.dict(by_alias=True) # `by_alias=True` ensures '_id' is used instead of 'id'
     recipe_dict['notes'] = [] # Initializing notes as empty
     recipe_dict['tags'] = [] # Initializing tags as empty
-    new_recipe = await recipe_collection.insert_one(recipe_dict)
+    new_recipe = await recipe_collection.insert_one(
+        recipe.model_dump(by_alias=True, exclude=["id"])
+    )
     return await recipe_collection.find_one({"_id": new_recipe.inserted_id})
 
 # Read recipes
