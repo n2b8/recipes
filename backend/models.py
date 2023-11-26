@@ -29,7 +29,10 @@ class Instruction(BaseModel):
 
 class Note(BaseModel):
     date: datetime
-    note_body: str
+    note: str
+
+class Tag(BaseModel):
+    tag: str
 
 class Recipe(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
@@ -42,6 +45,7 @@ class Recipe(BaseModel):
     serving_size_number: int
     serving_size_measure: str
     notes: Optional[List[Note]] = []
+    tags: Optional[List[Tag]] = []
 
     class Config:
         arbitrary_types_allowed = True
