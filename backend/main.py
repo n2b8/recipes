@@ -31,6 +31,14 @@ async def read_recipe(id: str):
         raise HTTPException(status_code=404, detail="Recipe not found")
     return recipe
 
+# Read recipes by tag
+@app.get("/recipes/tag/{tag}", response_model=List[Recipe])
+async def read_recipes_by_tag(tag: str):
+    recipes = await recipe_collection.find({"tags.tag": tag}).to_list(1000)
+    if not recipes:
+        raise HTTPException(status_code=404, detail=f"No recipes found with tag '{tag}'")
+    return recipes
+
 # Update recipe
 @app.put("/recipes/{id}", response_model=Recipe)
 async def update_recipe(id: str, recipe_update: Recipe):
