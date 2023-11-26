@@ -1,13 +1,15 @@
-// src/components/RecipeList.js
+// src/components/RecipesList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Grid from "@mui/material/Grid";
+import RecipeCard from "./RecipeCard";
 
 const RecipesList = () => {
     const [recipes, setRecipes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('/recipes')
+        axios.get('/recipes/')
             .then(response => {
                 setRecipes(response.data);
                 setIsLoading(false);
@@ -23,12 +25,14 @@ const RecipesList = () => {
     }
 
     return (
-        <div>
+        <Grid container spacing={2} sx={{ mt: 2 }}>
             {recipes.map(recipe => (
-                <div key={recipe.id}>{recipe.recipe_name}</div>
+                <Grid item key={recipe.id} xs={12} sm={6} md={4}>
+                    <RecipeCard recipe={recipe} />
+                </Grid>
             ))}
-        </div>
+        </Grid>
     );
-}
+};
 
 export default RecipesList;
