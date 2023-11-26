@@ -1,10 +1,20 @@
 from fastapi import FastAPI, HTTPException, Body
+from fastapi.middleware.cors import CORSMiddleware
 from backend.models import Recipe
 from backend.database import recipe_collection
 from bson import ObjectId
 from typing import List
 
 app = FastAPI()
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Create recipe
 @app.post("/recipes/", response_model=Recipe)

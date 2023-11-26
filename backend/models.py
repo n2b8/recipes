@@ -6,21 +6,6 @@ from typing_extensions import Annotated
 from fastapi import Body
 from pydantic.functional_validators import BeforeValidator
 
-# class PyObjectId(ObjectId):
-#     @classmethod
-#     def __get_validators__(cls):
-#         yield cls.validate
-#
-#     @classmethod
-#     def validate(cls, v, values, **kwargs):
-#         if not ObjectId.is_valid(v):
-#             raise ValueError("Invalid ObjectId")
-#         return ObjectId(v)
-#
-#     @classmethod
-#     def __get_pydantic_json_schema__(cls):
-#         return {"type": "string"}
-
 PyObjectId = Annotated[str, BeforeValidator(str)]
 
 
