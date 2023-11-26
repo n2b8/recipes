@@ -10,7 +10,7 @@ function App() {
     return (
         <div className="App">
             <NavBar onAddRecipe={() => setShowAddRecipeForm(true)} />
-            {showAddRecipeForm && <AddRecipeForm />}
+            {showAddRecipeForm && <AddRecipeForm onClose={() => setShowAddRecipeForm(false)} />}
             <main>
                 <RecipesList />
             </main>

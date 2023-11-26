@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-const AddRecipeForm = () => {
+const AddRecipeForm = ({ onClose }) => {
     const [recipeData, setRecipeData] = useState({
         recipe_name: '',
         // ... other recipe fields
@@ -44,6 +44,12 @@ const AddRecipeForm = () => {
                 sx={{ mt: 3, mb: 2 }}
             >
                 Submit
+            </Button>
+            <Button
+                onClick={onClose}
+                variant="outlined"
+            >
+                Cancel
             </Button>
         </Box>
     );
